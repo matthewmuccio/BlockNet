@@ -24,6 +24,8 @@ class Block:
 
 # A class that represents an immutable list of Block objects that are chained together by hashes, a Blockchain.
 class Blockchain:
+	# Difficulty of PoW algorithm.
+	difficulty = 2
 	# One or more blocks will be stored and chained together on the Blockchain, starting with the genesis block.
 	def __init__(self):
 		self.unconfirmed_transactions = [] # Pieces of data that are not yet added to the Blockchain.
@@ -36,6 +38,17 @@ class Blockchain:
 		genesis_block = Block(0, [], time.time(), "0")
 		genesis_block.hash = genesis_block.compute_hash()
 		self.chain.append(genesis_block)
+
+	# Proof of work algorithm that tries different values of nonce in order to get a hash
+	# that satisfies the difficulty criteria.
+	# Important to note that there is no definite logic to figure out the nonce quickly, simply brute force.
+	def proof_of_work(self, block):
+		block.nonce = 0
+		computed_hash = block.compute_hash()
+		while not computed_hash.startswith("0" * Blockchain.difficulty)
+			block.nonce += 1
+			computed_hash = block.compute_hash()
+		return computed_hash
 
 	# Returns the current last Block in the Blockchain.
 	@property

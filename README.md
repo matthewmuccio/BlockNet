@@ -100,3 +100,18 @@ Development
 - If the content of any of the previous blocks change, the hash of the block would change, which would lead to a mismatch with the previous_hash field in the next block.
 - If every block will be linked to the previous block by the previous_hash field, we must manually generate the very first block ourselves.
 - The very first block is called the genesis block, and it is generated manually or by some unique logic, in most cases.
+
+4. Implementing a proof of work algorithm
+- Selective endorsement vs. proof of work
+- Consensus in a (private) blockchain for business is not achieved through mining, but through a process called selective endorsement.
+- The network members control exactly who verifies transactions, much in the same way that business happens today.
+- A problem arises: if we change the previous block, someone can re-compute the hashes of all the following blocks quite easily and create a different valid blockchain.
+- To prevent this, I must make the task of calculating the hash difficult and random.
+- Instead of accepting any hash for the block, I will add some constraint to it.
+- Let's add a constrant that our hash should start with a certain number of leading zeroes.
+- I also know that unless we change the contents of the block, the hash will not change.
+- I will introduce a new field in our Block, a nonce.
+  - A nonce is a number that will continue to change until there is a hash that satisifes the constraint.
+- The number of leading zeroes, which will default to 2, decides the difficulty of the PoW algorithm.
+- This PoW algorithm is difficult to compute but easy to verify once we figure out the nonce.
+  - Verifying will just involve running the hash function again.
