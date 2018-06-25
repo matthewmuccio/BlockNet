@@ -18,12 +18,13 @@ Process
 
 Background
 ----------
-Public blockchain vs. Private blockchain
+Public blockchain
 - A public blockchain network is completely decentralized and open to the public.
 - No one entity has control over the network and they are secure in that data cannot be changed once validated on the blockchain.
 - Anyone can join and participate.
 - Examples: Bitcoin, Ethereum
 
+Private blockchain
 - A private blockchain network is primarily used by businesses who need greater privacy, security, and speed of transactions.
 - Participants need an invitation to join.
 - They operate quite similarly to public blockchains but have access controls that limit who can participate in the network.
@@ -32,6 +33,7 @@ Public blockchain vs. Private blockchain
 - Causes users to still have to rely on third-parties to transact.
 - Example: Ripple, Hyperledger
 
+Brief History of Bitcoin
 - In 2008, a whitepaper was released by an individual or group under the identifier Satoshi Nakamoto
 - Titled "Bitcoin: A Peer-to-Peer Electronic Cash System."
 - The paper combined cryptographic techniques and a peer-to-peer network without the need to trust a centralized authority to make payments from one person to another.
@@ -45,6 +47,7 @@ Public blockchain vs. Private blockchain
 
 Blockchain Basics
 -----------------
+Blockchain Technology
 - In simplest terms, blockchain is a mechanism for storing digital data.
 - The data can literally be anything.
 - The data can even be files, it doesn't matter.
@@ -52,6 +55,7 @@ Blockchain Basics
 - The data is stored in the form of blocks, which are chained together using hashes.
 - Storing data in BLOCKs + using hashes to CHAIN them together = blockchain
 
+Characteristics of Blockchain Networks
 - All of the "magic" in blockchain comes from the way this data is added and stored in the blockchain.
 - This yields some highly desirable and powerful characteristics:
   - Immutability of history
