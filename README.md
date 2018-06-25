@@ -1,4 +1,4 @@
-SimpleBlockchainApp
+BlockchainWebApp
 ===================
 A simple, fully-functional blockchain-based project which implements a public blockchain from scratch and a simple Flask web application to leverage it.
 
