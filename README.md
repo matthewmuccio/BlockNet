@@ -62,3 +62,26 @@ Characteristics of Blockchain Networks
   - Un-hackability of the system
   - Persistence of the data
   - No single point of failure
+
+Development
+-----------
+1. Store transactions into blocks
+- We will be storing our data in JSON, a widely-used format.
+- The generic term "data" is often used interchangeably with the term "transactions" on the Internet.
+- The transactions in the application are packed into blocks.
+- A block can contain one or many transactions.
+- The blocks containing the transactions are generated frequently and added to the blockchain.
+- Each block will have a unique ID, since there can be multiple blocks.
+
+2. Make the blocks immutable
+- We want to detect any kind of tampering in the data stored inside the block.
+- In blockchain technology, this is accomplished using a hash function.
+- It is a function that takes data of any size and produces data of a fixed sizse from it, which generally works to identify the input.
+- The Python Standard Library has a hashlib library with a SHA-256 and SHA-512 hashing function.
+- The characteristics of an ideal hash function are:
+  - It should be computationally easy to compute.
+  - Even a single bit change in data should make the hash change altogether.
+  - It should not be possible to guess the input from the output hash.
+- We will store the hash of every block in a field inside a Block object to act like a digital fingerprint of data contained in it.
+- Note: In most cryptocurrencies, the individual transactions in the block are also hashed, to form a hash tree, and the root of the tree might be used as the hash of the block.
+  - However, it is not a necessary requirement for the functioning of the blockchain.
