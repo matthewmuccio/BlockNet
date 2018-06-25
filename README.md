@@ -85,3 +85,18 @@ Development
 - We will store the hash of every block in a field inside a Block object to act like a digital fingerprint of data contained in it.
 - Note: In most cryptocurrencies, the individual transactions in the block are also hashed, to form a hash tree, and the root of the tree might be used as the hash of the block.
   - However, it is not a necessary requirement for the functioning of the blockchain.
+
+3. Chain the blocks
+- The blocks themselves are now set up.
+- The blockchain is a collection of blocks, and we must implement it accordingly.
+- We could store all of the blocks in a list (array) in Python, but it would not work.
+  - It is not sufficient.
+  - Someone could intentionally replace a block at a previous index in the collection/list.
+- In our current (unfinished) implementation, creating a new block with altered transactions, computing the hash, and replacing it with any older block works and it should not.
+- We must maintain the immutability and order of the blocks in some way.
+- We need a way to ensure that any change in the past blocks invalidates the entire chain.
+- One way to do this is to chain the blocks by the hash.
+  - By chaining, I mean to include the hash of the previous block in the current block.
+- If the content of any of the previous blocks change, the hash of the block would change, which would lead to a mismatch with the previous_hash field in the next block.
+- If every block will be linked to the previous block by the previous_hash field, we must manually generate the very first block ourselves.
+- The very first block is called the genesis block, and it is generated manually or by some unique logic, in most cases.
