@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-import hashlib import sha512
+from hashlib import sha512
 import json
 import time
 
@@ -21,7 +21,7 @@ class Block:
 		self.nonce = 0
 
 	# A function that creates the hash of the block contents.
-	def compute_hash(self, block):
+	def compute_hash(self):
 		block_string = json.dumps(self.__dict__, sort_keys=True)
 		return sha512(block_string.encode()).hexdigest()
 
@@ -90,7 +90,7 @@ class Blockchain:
 	def proof_of_work(self, block):
 		block.nonce = 0
 		computed_hash = block.compute_hash()
-		while not computed_hash.startswith("0" * Blockchain.difficulty)
+		while not computed_hash.startswith("0" * Blockchain.difficulty):
 			block.nonce += 1
 			computed_hash = block.compute_hash()
 		return computed_hash
@@ -122,7 +122,7 @@ def new_transaction():
 
 # Creates a new endpoint, and binds the function to the URL.
 @app.route("/chain", methods=["GET"])
-# Returns the node's copy of the blockchain (to display all confirmed transactions/posts).
+# Returns the node's copy of the blockchain in JSON format (to display all confirmed transactions/posts).
 def get_chain():
 	chain_data = []
 	for block in blockchain.chain:
