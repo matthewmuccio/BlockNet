@@ -105,7 +105,7 @@ Development
 - Selective endorsement vs. proof of work
 - Consensus in a (private) blockchain for business is not achieved through mining, but through a process called selective endorsement.
 - The network members control exactly who verifies transactions, much in the same way that business happens today.
-- A problem arises: if we change the previous block, someone can re-compute the hashes of all the following blocks quite easily and create a different valid blockchain.
+- A problem arises: if I change the previous block, I can re-compute the hashes of all the following blocks quite easily and create a different valid blockchain.
 - To prevent this, I must make the task of calculating the hash difficult and random.
 - Instead of accepting any hash for the block, I will add some constraint to it.
 - Let's add a constrant that our hash should start with a certain number of leading zeroes.
@@ -115,3 +115,14 @@ Development
 - The number of leading zeroes, which will default to 2, decides the difficulty of the PoW algorithm.
 - This PoW algorithm is difficult to compute but easy to verify once we figure out the nonce.
   - Verifying will just involve running the hash function again.
+
+5. Adding blocks to the chain, and mining
+- In order to add blocks to the chain, I must first verify two components:
+  - The PoW that is provided is correct.
+  - The previous_hash field of the block to be added points to the hash of the latest block in the chian.
+- At this point, I must implement a mechanism for mining the blocks.
+- The transactions are initially stored in a pool of unconfirmed transactions.
+- The process of putting the unconfirmed transactions in a block and computing PoW is known as mining the blocks.
+- Once the nonce satisfying our constraints is figured out, we can say that a block has been mined.
+- At that point, the block is put into the blockchain.
+- In most cryptocurrencies, miners may be awarded some cryptocurrency as a reward for spending their computing power to compute PoW.
