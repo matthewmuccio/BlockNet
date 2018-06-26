@@ -5,6 +5,9 @@ import hashlib import sha512
 import json
 import time
 
+from flask import Flask, request
+import requests
+
 
 # A class that represents a Block, which stores one or more pieces of data, in the immutable Blockchain.
 class Block:
@@ -15,8 +18,9 @@ class Block:
 		self.transactions = transactions
 		self.timestamp = timestamp
 		self.previous_hash = previous_hash
+		self.nonce = 0
 
-	# A function that creates the hash of the block.
+	# A function that creates the hash of the block contents.
 	def compute_hash(self, block):
 		block_string = json.dumps(self.__dict__, sort_keys=True)
 		return sha512(block_string.encode()).hexdigest()
@@ -95,3 +99,50 @@ class Blockchain:
 	@property
 	def last_block(self):
 		return self.chain[-1]
+
+
+# Flask web application
+# Creates a new Flask web app.
+app = Flask(__name__)
+# The node's copy of the blockchain.
+blockchain = Blockchain()
+
+# Creates a new endpoint, and binds the function to the URL.
+@app.route("/new_transaction", methods=["POST"])
+# Submits a new transaction, which adds new data to the blockchain.
+def new_transaction():
+	tx_data = request.get_json()
+	required_fields = ["author", "content"]
+	for field in required_fields:
+		if not tx_data.get(field):
+			return "Invalid transaction data", 404
+	tx_data["timestamp"] = time.time()
+	blockchain.add_new_transaction(tx_data)
+	return "Success", 201
+
+# Creates a new endpoint, and binds the function to the URL.
+@app.route("/chain", methods=["GET"])
+# Returns the node's copy of the blockchain (to display all confirmed transactions/posts).
+def get_chain():
+	chain_data = []
+	for block in blockchain.chain:
+		chain_data.append(block.__dict__)
+	return json.dumps({"length" : len(chain_data), "chain" : chain_data})
+
+# Creates a new endpoint, and binds the function to the URL.
+@app.route("/mine", methods=["GET"])
+# Requests the node to mine the unconfirmed transactions (if any).
+def mine_unconfirmed_transactions():
+	result = blockchain.mine()
+	if not result:
+		return "There are no transactions to mine."
+	return "Block #{0} has been mined.".format(result)
+
+# Creates a new endpoint, and binds the function to the URL.
+@app.route("/pending_tx")
+# Queries unconfirmed transactions.
+def get_pending_tx():
+	return json.dumps(blockchain.unconfirmed_transactions)
+
+# Runs the Flask web app.
+app.run(port=8000, debug=True)
