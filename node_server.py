@@ -190,10 +190,12 @@ def validate_and_add_block():
 		return "The block was discarded by the node.", 400
 	return "The block was added to the chain.", 201
 
-	def announce_new_block(block):
-		for peer in peers:
-			url = "http://{0}/add_block".format(peer)
-			requests.post(url, data=json.dumps(block.__dict__, sort_keys=True))
+# Announces to the network once a block has been mined, should always be called after validate_and_add_block().
+# Other blocks can simply verify the PoW and add it to their respective chains.
+def announce_new_block(block):
+	for peer in peers:
+		url = "http://{0}/add_block".format(peer)
+		requests.post(url, data=json.dumps(block.__dict__, sort_keys=True))
 
 # Runs the Flask web app.
 app.run(port=8000, debug=True)
