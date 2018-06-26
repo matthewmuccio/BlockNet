@@ -140,3 +140,20 @@ Development
 - At this point, I have a functioning blockchain, where I can create new transactions (posts), and mine them to add them to the blockchain.
   - However, the codebase at this point is meant to run on a single computer.
   - I will need to add functionality to have multiple nodes to maintain the blockchain.
+
+7. Establishing consensus and decentralization
+- Even though I am linking blocks with hashes, still cannot trust a single entity.
+- I will need multiple nodes to maintain the blockchain.
+- I must create an endpoint to let a node know of other peers in the network.
+- I must also create an endpoint to add new peers to the network.
+- There is a problem with multiple nodes.
+- Due to intentional manipulation or unintentional reasons, the copy of chains of a few nodes can differ.
+- In that case, there must be an agreement upon some version of the chain.
+  - This is known as consensus, which must be achieved to maintain the integrity of the entire system
+- A simple consensus algorithm could be to agree upon the longest valid chain when the chains of different participants in the network appear to diverge.
+- The rationale behind this approach is that the longest chain is a good estimate of the most amount of work done.
+- I also need to develop a way for any node to announce to the network that it has mined a block so that everyone can update their blockchain, and move on to mine other transactions.
+  - This involves creating another endpoint to add a block mined by a user to the node's chain.
+  - After every block is mined by the node, it should be announced, so that peers can then add it to their chains.
+  - Other nodes can simply verify the proof of work and add it to their respective chains.
+

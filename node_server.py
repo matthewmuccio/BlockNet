@@ -106,6 +106,8 @@ class Blockchain:
 app = Flask(__name__)
 # The node's copy of the blockchain.
 blockchain = Blockchain()
+# A set that stores the addresses to other participating members of the network.
+peers = set()
 
 # Creates a new endpoint, and binds the function to the URL.
 @app.route("/new_transaction", methods=["POST"])
@@ -143,6 +145,55 @@ def mine_unconfirmed_transactions():
 # Queries unconfirmed transactions.
 def get_pending_tx():
 	return json.dumps(blockchain.unconfirmed_transactions)
+
+# Creates a new endpoint, and binds the function to the URL.
+@app.route("/add_nodes", methods=["POST"])
+# Adds new peers to the network.
+def register_new_peers():
+	nodes = request.get_json()
+	if not nodes:
+		return "Invalid data", 400
+	for node in nodes:
+		peers.add(node)
+	return "Success", 201
+
+# A simple algorithm to achieve consensus to maintain the integrity of the system.
+# If a longer valid chain is found, the chain is replaced with it, and returns True, otherwise nothing happens and returns False.
+def consensus():
+	global blockchain
+	longest_chain = None
+	curr_len = len(blockchain)
+	# Achieve consensus by checking the JSON fields of every node in the network.
+	for node in peers:
+		response = requests.get("http://{0}/chain".format(node))
+		length = response.json()["length"]
+		chain = response.json()["chain"]
+		if length > curr_len and blockchain.check_chain_validity(chain):
+			curr_len = length
+			longest_chain = chain
+	if longest_chain:
+		blockchain = longest_chain
+		return True
+	return False
+
+# Creates a new endpoint, and binds the function to the URL.
+@app.route("/add_block", methods=["POST"])
+# Adds a block mined by a user to the node's chain.
+def validate_and_add_block():
+	block_data = request.get_json()
+	block = Block(block_data["index"], \
+			block_data["transactions"], \
+			block_data["timestamp", block_data["previous_hash"]])
+	proof = block_data["hash"]
+	added = blockchain.add_block(block, proof)
+	if not added:
+		return "The block was discarded by the node.", 400
+	return "The block was added to the chain.", 201
+
+	def announce_new_block(block):
+		for peer in peers:
+			url = "http://{0}/add_block".format(peer)
+			requests.post(url, data=json.dumps(block.__dict__, sort_keys=True))
 
 # Runs the Flask web app.
 app.run(port=8000, debug=True)
