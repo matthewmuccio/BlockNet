@@ -1,6 +1,6 @@
-BlockchainWebApp
+BlockNet
 ===================
-A simple, fully-functional blockchain-based project which implements a public blockchain from scratch and a simple Flask web application to leverage it.
+A simple, fully-functional, decentralized content sharing web application, which implements a public blockchain from scratch, and a Flask web application with Jinja2 templating to leverage it.
 
 Project
 -------
