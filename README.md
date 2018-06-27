@@ -157,3 +157,11 @@ Development
   - After every block is mined by the node, it should be announced, so that peers can then add it to their chains.
   - Other nodes can simply verify the proof of work and add it to their respective chains.
 
+8. Building the application
+- At this point, the backend is all set up.
+- I'll build an interface for the application, which is a view in the codebase.
+- Using Flask, I'll use Jinja2 templates to render the web pages and some CSS for styling.
+- The application needs to connect to a node in the blockchain network to fetch the data and submit new data.
+  - There can also be multiple nodes.
+- The application has an HTML form to take user input, and then makes a POST request to a connected node to add the transaction into the unconfirmed transactions pool.
+- The transaction is then mined by the network, and then finally will be fetched once the website is refreshed.
