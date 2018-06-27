@@ -24,6 +24,7 @@ class Block:
 	def compute_hash(self):
 		block_string = json.dumps(self.__dict__, sort_keys=True)
 		return sha512(block_string.encode()).hexdigest()
+# End of Block class.
 
 
 # A class that represents an immutable list of Block objects that are chained together by hashes, a Blockchain.
@@ -55,12 +56,8 @@ class Blockchain:
 		self.chain.append(block)
 		return True
 
-	# Adds a new transaction the list of unconfirmed transactions (not yet in the blockchain).
-	def add_new_transaction(self, transaction):
-		self.unconfirmed_transactions.append(transaction)
-
 	# Serves as an interface to add the transactions to the blockchain by adding them
-	# and then figuring out PoW.
+	# and then figuring out the PoW.
 	def mine(self):
 		# If unconfirmed_transactions is empty, no mining to be done.
 		if not self.unconfirmed_transactions:
@@ -77,12 +74,10 @@ class Blockchain:
 		self.add_block(new_block, proof)
 		# Empties the list of unconfirmed transactions since they are now added to the blockchain.
 		self.unconfirmed_transactions = []
+		# Announces to the network once a block has been mined, other blocks can simply verify the PoW and add it to their respective chains.
+		announce_new_block(new_block)
 		# Returns the index of the block that was just added to the chain.
 		return new_block.index
-
-	# Checks if block_hash is a valid hash of the given block, and if it satisfies the difficulty criteria.
-	def is_valid_proof(self, block, block_hash):
-		return (block_hash.startswith("0" * Blockchain.difficulty) and block_hash == block.compute_hash())
 
 	# Proof of work algorithm that tries different values of nonce in order to get a hash
 	# that satisfies the difficulty criteria.
@@ -95,10 +90,36 @@ class Blockchain:
 			computed_hash = block.compute_hash()
 		return computed_hash
 
+	# Adds a new transaction the list of unconfirmed transactions (not yet in the blockchain).
+	def add_new_transaction(self, transaction):
+		self.unconfirmed_transactions.append(transaction)
+
+	# Checks if the chain is valid at the current time.
+	@classmethod
+	def check_chain_validity(cls, chain):
+		result = True
+		previous_hash = "0"
+		for block in chain:
+			block_hash = block.hash
+			# Removes the hash attribute to recompute the hash again using compute_hash.
+			delattr(block, "hash")
+			if not cls.is_valid_proof(block, block.hash) or previous_hash != block.previous_hash:
+				result = False
+				break
+			block.hash = block_hash
+			previous_hash = block_hash
+		return result
+
+	# Checks if block_hash is a valid hash of the given block, and if it satisfies the difficulty criteria.
+	@classmethod
+	def is_valid_proof(cls, block, block_hash):
+		return (block_hash.startswith("0" * Blockchain.difficulty) and block_hash == block.compute_hash())
+
 	# Returns the current last Block in the Blockchain.
 	@property
 	def last_block(self):
 		return self.chain[-1]
+# End of Blockchain class.
 
 
 # Flask web application
@@ -126,6 +147,8 @@ def new_transaction():
 @app.route("/chain", methods=["GET"])
 # Returns the node's copy of the blockchain in JSON format (to display all confirmed transactions/posts).
 def get_chain():
+	# Ensures that the user's chain is the current (longest) chain.
+	consensus()
 	chain_data = []
 	for block in blockchain.chain:
 		chain_data.append(block.__dict__)
@@ -141,12 +164,6 @@ def mine_unconfirmed_transactions():
 	return "Block #{0} has been mined.".format(result)
 
 # Creates a new endpoint, and binds the function to the URL.
-@app.route("/pending_tx")
-# Queries unconfirmed transactions.
-def get_pending_tx():
-	return json.dumps(blockchain.unconfirmed_transactions)
-
-# Creates a new endpoint, and binds the function to the URL.
 @app.route("/add_nodes", methods=["POST"])
 # Adds new peers to the network.
 def register_new_peers():
@@ -157,12 +174,18 @@ def register_new_peers():
 		peers.add(node)
 	return "Success", 201
 
+# Creates a new endpoint, and binds the function to the URL.
+@app.route("/pending_tx")
+# Queries unconfirmed transactions.
+def get_pending_tx():
+	return json.dumps(blockchain.unconfirmed_transactions)
+
 # A simple algorithm to achieve consensus to maintain the integrity of the system.
 # If a longer valid chain is found, the chain is replaced with it, and returns True, otherwise nothing happens and returns False.
 def consensus():
 	global blockchain
 	longest_chain = None
-	curr_len = len(blockchain)
+	curr_len = len(blockchain.chain)
 	# Achieve consensus by checking the JSON fields of every node in the network.
 	for node in peers:
 		response = requests.get("http://{0}/chain".format(node))

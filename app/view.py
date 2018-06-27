@@ -15,13 +15,13 @@ CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
 # Stores all the posts in the node.
 posts = []
 
-# Gets the data from node's /chain endpoint, parses the data, and stores is locally.
+# Gets the data from node's /chain endpoint, parses the data, and stores it locally.
 def fetch_posts():
 	get_chain_address = "{0}/chain".format(CONNECTED_NODE_ADDRESS)
 	response = requests.get(get_chain_address)
 	if response.status_code == 200:
 		content = []
-		chain = json.loads(response.content)
+		chain = json.loads(response.content.decode("utf-8"))
 		for block in chain["chain"]:
 			for tx in block["transactions"]:
 				tx["index"] = block["index"]
@@ -52,10 +52,8 @@ def submit_textarea():
 		"content" : post_content,
 	}
 	# Submit a new transaction.
-	new_tx_address = "{}/new_transaction"
-	requests.post(new_tx_address, \
-			json=post_object, \
-			headers={"Content-type" : "application/json"})
+	new_tx_address = "{0}/new_transaction".format(CONNECTED_NODE_ADDRESS)
+	requests.post(new_tx_address, json=post_object, headers={"Content-type" : "application/json"})
 	return redirect("/")
 
 # Converts a timestamp (in UNIX time) to a string.
