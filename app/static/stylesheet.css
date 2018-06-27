@@ -1,9 +1,55 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik");
+/* */
+h1, a {
+    font-family: "Rubik", sans-serif;
+}
+
+.hr {
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #7f8c8d;
+}
+
+.btn {
+    font-family: "Rubik", sans-serif;
+    font-size: 14px;
+    color: white;
+    background-color: #3498db;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+    cursor: pointer;
+}
+
+.post-textarea, .name-input {
+    font-family: "Rubik", sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #7f8c8d;
+}
+
+body {
+    background-color: #ecf0f1;
+}
+
+/* post_box class */
 .post_box {
-    background: #fff;
+    /*background: #fff;*/
     padding: 12px 0px 0px 12px;
     margin-top: 0px;
     margin-bottom: 8px;
-    border-top: 1px solid #f0f0f0;
+    /*border-top: 1px solid #f0f0f0;*/
+    border: 1px solid #7f8c8d;
+    font-family: "Rubik", sans-serif;
 }
 
 .post_box-header {
