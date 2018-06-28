@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Rubik");
 @import url("https://fonts.googleapis.com/css?family=Rubik+Mono+One");
 
-/* My styling */
+/* My styling. */
 h1 {
     font-family: "Rubik Mono One", sans-serif;
     font-size: 42px;
@@ -11,7 +11,49 @@ h2, a {
     font-family: "Rubik", sans-serif;
 }
 
+/* Header and navigation bar. */
+.navbar {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #3498db;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.navbar-item {
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.navbar-item:hover {
+    background-color: #2980b9;
+}
+
+.active-link {
+    background-color: #2980b9;
+}
+
+/* Title, subtitle, and horizontal line. */
 .title {
+    margin-top: 80px;
     text-align: center;
     line-height: 16px;
 }
@@ -22,6 +64,7 @@ h2, a {
     border-color: #7f8c8d;
 }
 
+/* Buttons, post text area, name input, and body styling. */
 .btn {
     font-family: "Rubik", sans-serif;
     font-size: 14px;

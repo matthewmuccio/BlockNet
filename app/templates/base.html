@@ -5,8 +5,12 @@
 		<link rel="stylesheet" href="../static/stylesheet.css">
 	</head>
 	<body>
-		<div><a href="/">Home</a></div>
-		<div><a href="http://www.matthewmuccio.com" target="_blank">Matthew Muccio</a></div>
+		<div class="navbar">
+			<a class="navbar-item left active-link" href="/">Home</a>
+			<a class="navbar-item left" href="{{ node_address }}/mine" target="_blank">Request to Mine</a>
+			<a class="navbar-item left" href="/">Resync Blockchain</a>
+			<a class="navbar-item right" href="http://www.matthewmuccio.com" target="_blank">Matthew Muccio</a>
+		</div>
 		<div class="title">
 			<h1>{{ title }}</h1>
 			<h2>{{ subtitle }}</h2>
