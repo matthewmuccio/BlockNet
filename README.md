@@ -1,20 +1,20 @@
 BlockNet
 ===================
-A simple, fully-functional, decentralized content sharing web application, which implements a public blockchain from scratch, and a Flask web application with Jinja2 templating to leverage it.
+A simple, fully-functional, decentralized content sharing web application, which implements a public blockchain from scratch, and the Flask web framework with Jinja2 templating.
 
 Project
 -------
 - Objective: to build a simple web application using a public blockchain that allows users to share information over a decentralized network.
 - Because the content will be stored on the blockchain, it is immutable and permanent (more below).
-- Defining the structure of the data that will be stored on the blockchain:
-- A post is a message posted by any user on the application, it must have three properties: content, author, and timestamp.
+- An explicit definition of the structure of the data (posts) that will be stored on the blockchain:
+  - A post is a message posted by any user on the web application, it must have three properties: content, author, and timestamp.
 
 Process
 -------
-- Using Flask microframework, create endpoints for different functions of the blockchain, such as adding a transaction.
+- Using the Flask web microframework, create endpoints for different functions of the blockchain, such as adding a transaction.
 - Then, run the scripts on multiple machines in order to create a decentralized network.
-- Build a simple UI that interacts with the blockchain and stores information for any use case.
-- For instance, content sharing, P2P payments, chatting, or e-commerce.
+- Build a simple UI with Flask and Jinja2 templating that interacts with the blockchain and stores information for any use case.
+  - For instance, content sharing, P2P payments, chatting, or e-commerce.
 
 Background
 ----------
@@ -38,7 +38,7 @@ Brief History of Bitcoin
 - Titled "Bitcoin: A Peer-to-Peer Electronic Cash System."
 - The paper combined cryptographic techniques and a peer-to-peer network without the need to trust a centralized authority to make payments from one person to another.
 - It also introduced a distributed system of storing data (blockchain).
-- I now know this concept has far wider applicability than just payments, or cryptocurrencies.
+- We all now know this concept has far wider applicability than just payments, or cryptocurrencies.
 - Blockchain technology has exploded across nearly every industry.
 - It is now the underlying technology behind:
   - Fully digital cryptocurrencies (i.e., Bitcoin)
