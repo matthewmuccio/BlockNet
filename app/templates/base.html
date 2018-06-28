@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{{ title }}</title>
+		<title>{{ title }} - {{ subtitle }}</title>
 		<link rel="stylesheet" href="../static/stylesheet.css">
 	</head>
 	<body>
 		<div><a href="/">Home</a></div>
 		<div><a href="http://www.matthewmuccio.com" target="_blank">Matthew Muccio</a></div>
-		<center><h1>{{ title }}</h1></center>
+		<div class="title">
+			<h1>{{ title }}</h1>
+			<h2>{{ subtitle }}</h2>
+		</div>
 		<hr class="hr">
 		{% with messages = get_flashed_messages() %}
 		{% if messages %}

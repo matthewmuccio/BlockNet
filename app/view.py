@@ -36,7 +36,8 @@ def fetch_posts():
 def index():
 	fetch_posts()
 	return render_template("index.html", \
-				title="BlockNet: Decentralized Content Sharing", \
+				title="BlockNet", \
+				subtitle="A Decentralized Network for Content Sharing", \
 				posts=posts, \
 				node_address=CONNECTED_NODE_ADDRESS, \
 				readable_time=timestamp_to_string)
