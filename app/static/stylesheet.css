@@ -7,11 +7,11 @@ h1 {
     font-size: 42px;
 }
 
-h2, a {
+h2, a, p {
     font-family: "Rubik", sans-serif;
 }
 
-/* Header and navigation bar. */
+/* Header and navigation bar styling. */
 .navbar {
     margin: 0px;
     padding: 0px;
@@ -28,11 +28,15 @@ h2, a {
     display: block;
     color: #ffffff;
     text-align: center;
-    padding: 15px 20px;
+    padding: 20px 20px;
     text-decoration: none;
     font-size: 16px;
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
+}
+
+.navbar-item:hover {
+    background-color: #2980b9;
 }
 
 .left {
@@ -43,17 +47,13 @@ h2, a {
     float: right;
 }
 
-.navbar-item:hover {
-    background-color: #2980b9;
-}
-
 .active-link {
     background-color: #2980b9;
 }
 
 /* Title, subtitle, and horizontal line. */
 .title {
-    margin-top: 80px;
+    margin-top: 90px;
     text-align: center;
     line-height: 16px;
 }
@@ -94,6 +94,61 @@ h2, a {
 
 body {
     background-color: #ecf0f1;
+    height: 100%;
+}
+
+/* Footer styling. */
+.footer {
+    height: 120px;
+    line-height: 10px;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #3498db;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.footer-item {
+    display: block;
+    margin-top: 30px;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.footer-item a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.footer-item a:hover {
+    text-decoration: underline;
+}
+
+.social-icon-list {
+    list-style-type: none;
+    text-align: center;
+    margin-right: 35px;
+}
+
+.social-icon {
+    font-size: 30px;
+    display: inline;
+    margin: 0 10px 0 10px;
+    text-decoration: none;
+}
+
+.white-icon {
+    color: #ffffff;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.white-icon:hover {
+    color: #bbbbbb;
 }
 
 /* post_box class styling */
