@@ -36,8 +36,8 @@ body {
     padding: 2rem 2rem;
     text-decoration: none;
     font-size: 1.6rem;
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
 .navbar-item:hover {
@@ -76,7 +76,7 @@ body {
     border-style: solid;
     border-width: 0.05rem;
     border-color: #7f8c8d;
-    width: 56rem;
+    width: 55rem;
 }
 
 /* Buttons, post text area, name input, and body styling. */
@@ -93,8 +93,8 @@ body {
     padding: 1rem;
     border-radius: 0.4rem;
     border: none;
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
 .btn:hover {
@@ -143,14 +143,15 @@ body {
 .footer-item a {
     text-decoration: none;
     color: #ffffff;
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
 .footer-item a:hover {
     color: #2980b9;
 }
 
+/* Font Awesome social media icons (on footer) styling. */
 .social-icon-list {
     list-style-type: none;
     text-align: center;
@@ -166,15 +167,15 @@ body {
 
 .white-icon {
     color: #ffffff;
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
 .white-icon:hover {
     color: #2980b9;
 }
 
-/* post_box class styling */
+/* Post boxes styling */
 .post_box {
     background: #fff;
     padding: 1.2rem 0 0 1.2rem;
