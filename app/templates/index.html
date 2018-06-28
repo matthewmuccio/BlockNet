@@ -2,34 +2,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<center>
-		<br>
-		<form action="/submit" id="textform" method="post">
-			<textarea class="post-textarea" name="content" rows="4" cols="50" placeholder="Write some content to add to the network ..."></textarea>
-			<br><br>
-			<input class="name-input" type="text" name="author" placeholder="Name">
-			<input class="btn" type="submit" value="Post">
-		</form>
-		<br>
-		<!--<a href="{{node_address}}/mine" target="_blank"><button class="btn">Request to Mine</button></a>
-		<a href="/"><button class="btn">Resync Your Blockchain</button></a>-->
-	</center>
+	<div class="content">
+		<center>
+			<br>
+			<form action="/submit" id="textform" method="post">
+				<textarea class="post-textarea" name="content" rows="4" cols="50" placeholder="Write some content to add to the network ..."></textarea>
+				<br><br>
+				<input class="name-input" type="text" name="author" placeholder="Name">
+				<input class="btn" type="submit" value="Post">
+			</form>
+			<br>
+			<!--<a href="{{node_address}}/mine" target="_blank"><button class="btn">Request to Mine</button></a>
+			<a href="/"><button class="btn">Resync Your Blockchain</button></a>-->
+		</center>
 
-	<div style="margin: 20px;">
-		{% for post in posts %}
-		<div class="post_box">
-			<div class="post_box-header">
-				<!--<div class="post_box-options"><button class="option-btn">Reply</button></div>-->
-				<div style="background: rgb(52, 152, 219) none repeat scroll 0% 0%; box-shadow: rgb(52, 152, 219) 0px 0px 0px 2px;" class="post_box-avatar">{{post.author[0]}}</div>
-				<div class="name-header">{{post.author}}</div>
-				<div class="post_box-subtitle"><i>Posted at {{readable_time(post.timestamp)}}</i></div>
-			</div>
-			<div>
-				<div class="post_box-body">
-					<p>{{post.content}}</p>
+		<div class="posts">
+			{% for post in posts %}
+			<div class="post_box">
+				<div class="post_box-header">
+					<!--<div class="post_box-options"><button class="option-btn">Reply</button></div>-->
+					<div style="background: rgb(52, 152, 219) none repeat scroll 0% 0%; box-shadow: rgb(52, 152, 219) 0px 0px 0px 2px;" class="post_box-avatar">{{post.author[0]}}</div>
+					<div class="name-header">{{post.author}}</div>
+					<div class="post_box-subtitle"><i>Posted at {{readable_time(post.timestamp)}}</i></div>
+				</div>
+				<div>
+					<div class="post_box-body">
+						<p>{{post.content}}</p>
+					</div>
 				</div>
 			</div>
+			{% endfor %}
 		</div>
-		{% endfor %}
-    </div>
+	</div>
 {% endblock %}

@@ -7,8 +7,16 @@ h1 {
     font-size: 42px;
 }
 
-h2, a, p {
+html {
+    font-size: 62.5%
+}
+
+body {
     font-family: "Rubik", sans-serif;
+    background-color: #ecf0f1;
+    margin: 0;
+    min-height: 100%;
+    position: relative;
 }
 
 /* Header and navigation bar styling. */
@@ -62,9 +70,15 @@ h2, a, p {
     border-style: solid;
     border-width: 0.5px;
     border-color: #7f8c8d;
+    width: 56rem;
 }
 
 /* Buttons, post text area, name input, and body styling. */
+.content {
+    padding: 0px;
+    padding-bottom: 120px;
+}
+
 .btn {
     font-family: "Rubik", sans-serif;
     font-size: 14px;
@@ -92,22 +106,23 @@ h2, a, p {
     border-color: #7f8c8d;
 }
 
-body {
-    background-color: #ecf0f1;
-    height: 100%;
+.posts {
+    margin: 20px;
 }
 
 /* Footer styling. */
 .footer {
     height: 120px;
     line-height: 10px;
-    margin: 0px;
-    padding: 0px;
+    padding: 0;
+    margin: 0;
     overflow: hidden;
     background-color: #3498db;
+    width: 100%;
     position: absolute;
     left: 0;
     right: 0;
+    bottom: 0;
 }
 
 .footer-item {
@@ -153,7 +168,6 @@ body {
 
 /* post_box class styling */
 .post_box {
-    font-family: "Rubik", sans-serif;
     background: #fff;
     padding: 12px 0px 0px 12px;
     margin-top: 0px;
